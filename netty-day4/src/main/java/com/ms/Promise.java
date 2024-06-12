@@ -8,7 +8,5 @@ import java.util.concurrent.Future;
  * @Version:
  * @Description:
  **/
-public interface Promise<T> extends Runnable,  Future<T> {
-    @Override
-    void run();
+public interface Promise<T> extends  Future<T> {
 }

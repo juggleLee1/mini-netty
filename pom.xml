@@ -13,6 +13,7 @@
         <module>netty-test2</module>
         <module>netty-day3</module>
         <module>netty-day4</module>
+        <module>netty-day5</module>
     </modules>
 
     <properties>

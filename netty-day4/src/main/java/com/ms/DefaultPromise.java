@@ -1,5 +1,7 @@
 package com.ms;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -14,27 +16,59 @@ import java.util.concurrent.TimeoutException;
 public class DefaultPromise<T> implements Promise<T> {
 
     private volatile Object result;
-    private Callable<T> callable;
     private int waiters;
+    public static final Object SUCCESS = new Object();
 
-    public DefaultPromise(Callable<T> callable) {
-        this.callable = callable;
+    //这就是观察者模式中的监听器集合，回调函数就定义在监听器中
+    private List<GenericListener> listeners = new ArrayList();
+
+    //promise和future的区别就是，promise可以让用户自己设置成功的返回值，
+    //也可以设置失败后返回的错误
+    public Promise<T> setSuccess(T result) {
+        if (setSuccess0(result)) {
+            return this;
+        }
+        throw new IllegalStateException("complete already: " + this);
     }
 
-    @Override
-    public void run() {
-        T object;
-        try {
-            object = callable.call();
-            set(object);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    private boolean setSuccess0(T result) {
+        //设置成功结果，如果结果为null，则将SUCCESS赋值给result
+        return set(result == null ? SUCCESS : result);
+    }
+
+    private boolean set(Object object) {
+        if (object != null) {
+            this.result = object;
+            checkNotifyWaiters();
+            notifyListener();
+            return true;
+        }
+        return false;
+    }
+
+    private void notifyListener() {
+        for (GenericListener listener : listeners) {
+            try {
+                listener.operationComplete(this);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    private void set(T object) {
-        this.result = object;
-        checkNotifyWaiters();
+    //添加监听器的方法
+    public Promise<T> addListener(GenericListener<? extends Promise<? super T>> listener) {
+        synchronized (this) {
+            //添加监听器
+            listeners.add(listener);
+        }
+        //判断任务是否完成，实际上就是检查result是否被赋值了
+        if (isDone()) {
+            //唤醒监听器，让监听器去执行
+            notifyListener();
+        }
+        //最后返回当前对象
+        return this;
     }
 
     private synchronized void checkNotifyWaiters() {
@@ -64,6 +98,12 @@ public class DefaultPromise<T> implements Promise<T> {
             await();
         }
         return getNow();
+    }
+
+    //服务器和客户端经常会调用该方法同步等待结果
+    public Promise<T> sync() throws InterruptedException {
+        await();
+        return this;
     }
 
     //等待结果的方法
