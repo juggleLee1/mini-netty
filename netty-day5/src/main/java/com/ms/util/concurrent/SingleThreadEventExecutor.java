@@ -105,16 +105,74 @@ public abstract class SingleThreadEventExecutor implements Executor {
     }
 
     private void addTask(Runnable task) {
-        if (!offer(task)) {
+        if (!offerTask(task)) {
             reject(task);
         }
     }
 
-    private void reject(Runnable task) {
+    protected static void reject() {
         throw new RejectedExecutionException("event executor terminated");
     }
 
-    private boolean offer(Runnable task) {
+    protected final void reject(Runnable task) {
+        rejectedExecutionHandler.rejected(task, this);
+    }
+
+    final boolean offerTask(Runnable task) {
         return taskQueue.offer(task);
     }
+
+    public boolean inEventLoop(Thread thread) {
+        return thread == this.thread;
+    }
+
+    protected boolean hasTasks() {
+        LOGGER.info("我没任务了！");
+        return !taskQueue.isEmpty();
+    }
+
+    protected void runAllTasks() {
+        runAllTasksFrom(taskQueue);
+    }
+
+    protected void runAllTasksFrom(Queue<Runnable> taskQueue) {
+        //从任务对立中拉取任务,如果第一次拉取就为null，说明任务队列中没有任务，直接返回即可
+        Runnable task = pollTaskFrom(taskQueue);
+        if (task == null) {
+            return;
+        }
+        for (;;) {
+            //执行任务队列中的任务
+            safeExecute(task);
+            //执行完毕之后，拉取下一个任务，如果为null就直接返回
+            task = pollTaskFrom(taskQueue);
+            if (task == null) {
+                return;
+            }
+        }
+    }
+
+    protected static Runnable pollTaskFrom(Queue<Runnable> taskQueue) {
+        return taskQueue.poll();
+    }
+
+    private void safeExecute(Runnable task) {
+        try {
+            task.run();
+        } catch (Throwable t) {
+            LOGGER.warn("A task raised an exception. Task: {}", task, t);
+        }
+    }
+
+    protected void interruptThread() {
+        Thread currentThread = thread;
+        if (currentThread == null) {
+            interrupted = true;
+        } else {
+            //中断线程并不是直接让该线程停止运行，而是提供一个中断信号
+            //也就是标记，想要停止线程仍需要在运行流程中结合中断标记来判断
+            currentThread.interrupt();
+        }
+    }
+
 }

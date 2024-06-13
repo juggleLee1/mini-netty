@@ -12,7 +12,7 @@ public class RejectedExecutionHandlers {
     private static final RejectedExecutionHandler REJECT = new RejectedExecutionHandler() {
 
         @Override
-        public void reject(Runnable task, SingleThreadEventExecutor executor) {
+        public void rejected(Runnable task, SingleThreadEventExecutor executor) {
             throw new RejectedExecutionException();
         }
     };

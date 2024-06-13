@@ -7,5 +7,5 @@ package com.ms.util.concurrent;
  * @Description:
  **/
 public interface RejectedExecutionHandler {
-    void reject(Runnable task, SingleThreadEventExecutor executor);
+    void rejected(Runnable task, SingleThreadEventExecutor executor);
 }
