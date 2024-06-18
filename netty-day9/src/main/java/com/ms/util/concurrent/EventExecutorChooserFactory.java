@@ -1,0 +1,20 @@
+package com.ms.util.concurrent;
+
+
+/**
+ * 执行器选择工厂接口
+ */
+public interface EventExecutorChooserFactory {
+
+
+    EventExecutorChooser newChooser(EventExecutor[] executors);
+
+
+    interface EventExecutorChooser {
+
+        /**
+         * Returns the new {@link EventExecutor} to use.
+         */
+        EventExecutor next();
+    }
+}
