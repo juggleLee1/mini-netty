@@ -1,9 +1,6 @@
 package com.ms.channel.socket;
 
-import com.pp.netty.channel.ChannelConfig;
-
-import java.net.ServerSocket;
-import java.net.StandardSocketOptions;
+import com.ms.channel.ChannelConfig;
 
 
 public interface ServerSocketChannelConfig extends ChannelConfig {

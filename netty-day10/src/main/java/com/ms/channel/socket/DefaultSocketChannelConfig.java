@@ -1,17 +1,15 @@
 package com.ms.channel.socket;
 
 
-import com.pp.netty.channel.ChannelOption;
-import com.pp.netty.channel.DefaultChannelConfig;
-import com.ms.channel.socket.nio.NioChannelOption;
+import com.ms.channel.ChannelOption;
+import com.ms.channel.DefaultChannelConfig;
 import com.ms.channel.socket.nio.NioSocketChannel;
 
 import java.net.Socket;
 import java.net.SocketException;
-import java.nio.channels.SocketChannel;
 import java.util.Map;
 
-import static com.pp.netty.channel.ChannelOption.*;
+import static com.ms.channel.ChannelOption.*;
 
 
 /**

@@ -1,6 +1,6 @@
 package com.ms.channel.socket.nio;
 
-import com.pp.netty.channel.ChannelOption;
+import com.ms.channel.ChannelOption;
 
 import java.io.IOException;
 import java.net.SocketOption;

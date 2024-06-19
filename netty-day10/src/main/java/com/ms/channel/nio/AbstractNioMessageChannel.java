@@ -1,7 +1,6 @@
 package com.ms.channel.nio;
 
-import com.pp.netty.channel.Channel;
-import com.pp.netty.channel.ChannelPromise;
+import com.ms.channel.Channel;
 
 import java.nio.channels.SelectableChannel;
 import java.util.ArrayList;

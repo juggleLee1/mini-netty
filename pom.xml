@@ -19,6 +19,7 @@
         <module>netty-day8</module>
         <module>netty-day9</module>
         <module>netty-day10</module>
+        <module>netty-day11</module>
     </modules>
 
     <properties>

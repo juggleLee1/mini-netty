@@ -1,7 +1,7 @@
 package com.ms.channel.socket.nio;
 
 
-import com.pp.netty.channel.ChannelOption;
+import com.ms.channel.ChannelOption;
 import com.ms.channel.nio.AbstractNioMessageChannel;
 import com.ms.channel.nio.NioEventLoop;
 import com.ms.channel.socket.DefaultServerSocketChannelConfig;

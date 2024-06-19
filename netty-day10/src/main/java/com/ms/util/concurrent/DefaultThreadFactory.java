@@ -1,6 +1,5 @@
 package com.ms.util.concurrent;
 
-import com.pp.netty.channel.SingleThreadEventLoop;
 import com.ms.util.internal.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
