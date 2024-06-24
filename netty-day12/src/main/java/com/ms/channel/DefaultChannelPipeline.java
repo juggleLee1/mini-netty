@@ -297,6 +297,8 @@ public class DefaultChannelPipeline implements ChannelPipeline{
             ctx = getContextOrDie(baseName);
             newCtx = newContext(group, name, handler);
             addAfter0(ctx, newCtx);
+            // 每次添加一个 ChannelHandler  就创建一个 ChannelHandlerContext 和 PendingHandlerCallback 对象
+            // PendingHandlerCallback 包裹着每一个 ChannelHandlerContext 会调用到 added 方法
             if (!registered) {
                 newCtx.setAddPending();
                 callHandlerCallbackLater(newCtx, true);

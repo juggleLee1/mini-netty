@@ -51,6 +51,11 @@ public abstract class AbstractConstant<T extends AbstractConstant<T>> implements
         return super.equals(obj);
     }
 
+    /**
+     * 这就是 自限定泛型类型得到意义，不要对 o 再进行类型转换
+     * @param o the object to be compared.
+     * @return
+     */
     @Override
     public final int compareTo(T o) {
         if (this == o) {
