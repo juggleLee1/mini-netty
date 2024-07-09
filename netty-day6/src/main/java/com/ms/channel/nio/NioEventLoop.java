@@ -185,6 +185,10 @@ public class NioEventLoop extends SingleThreadEventLoop {
                 socketChannel.configureBlocking(false);
                 //注册客户端的channel到多路复用器，这里的操作是由服务器的单线程执行器执行的，在netty源码中，这里注册
                 //客户端channel到多路复用器是由workGroup管理的线程执行器完成的。
+                // 如果是 服务器   服务器channel是由bootstrap在绑定端口的时候传进来的，客户端channel则是在这里传进来的
+                // 如果是 客户端   客户端channel是由bootstrap传进来的，服务器channel没有
+                // 只有 boss group的 nioEventLoop 采用 workGroup
+                // boss group 只接收连接   workGroup 只处理读写
                 NioEventLoop nioEventLoop = (NioEventLoop) workerGroup.next().next();
                 nioEventLoop.setServerSocketChannel(serverSocketChannel);
                 logger.info("+++++++++++++++++++++++++++++++++++++++++++要注册到第" + nioEventLoop.id +"work上！");

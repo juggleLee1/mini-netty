@@ -15,6 +15,7 @@ public class ServerTest {
         NioEventLoopGroup workerGroup = new NioEventLoopGroup(2);
         serverBootstrap.group(bossGroup,workerGroup).
                 serverSocketChannel(serverSocketChannel);
+        // bind 中 会启动单线程执行器
         serverBootstrap.bind("127.0.0.1",8080);
     }
 }
