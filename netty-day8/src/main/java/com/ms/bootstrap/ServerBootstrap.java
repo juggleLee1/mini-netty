@@ -78,7 +78,7 @@ public class ServerBootstrap<C extends Channel> {
         }else {
             //走到这里，说明上面的initAndRegister方法中，服务端的channel还没有完全注册到单线程执行器的selector上
             //此时可以直接则向regFuture添加回调函数，这里有个专门的静态内部类，用来协助判断服务端channel是否注册成功
-            //该回调函数会在regFuture完成的状态下被调用，在回调函数中进行服务端的绑定，回顾一下第四课就明白了。
+            //该回调函数会在regFuture完成的状态下被调用，在回调函数中进行服务端的绑定
             // PendingRegistrationPromise 引用了一个变量 表示 注册的状态
             final PendingRegistrationPromise promise = new PendingRegistrationPromise(channel);
             regFuture.addListener(new ChannelFutureListener() {

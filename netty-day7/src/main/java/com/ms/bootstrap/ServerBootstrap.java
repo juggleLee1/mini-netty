@@ -61,7 +61,7 @@ public class ServerBootstrap {
         nioEventLoop.setServerSocketChannel(serverSocketChannel);
         nioEventLoop.setWorkerGroup(workerGroup);
         //直接使用nioeventloop把服务端的channel注册到单线程执行器上
-        //应该也把register改成返回promise的，下节课就会实现了
+        //应该也把register改成返回promise的
         nioEventLoop.register(serverSocketChannel,nioEventLoop);
         DefaultPromise<Object> defaultPromise = new DefaultPromise<>(nioEventLoop);
         doBind0(localAddress,defaultPromise);

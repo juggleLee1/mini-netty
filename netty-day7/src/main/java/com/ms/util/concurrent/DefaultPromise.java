@@ -343,7 +343,7 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
             }
             return true;
         }
-        //如果取消失败则说明result已经有值了
+        //如果取消失败则说明result已经有值了，或者是不可取消或者已经取消了或者成功执行了，或者发生了异常
         return false;
     }
 

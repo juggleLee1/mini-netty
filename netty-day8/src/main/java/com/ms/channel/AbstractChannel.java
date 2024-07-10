@@ -111,6 +111,9 @@ public abstract class AbstractChannel implements Channel{
      * 在这里多说一句，越到后面抽象类越多，看源码的时候常常会发现抽象父类调用子类的方法看着看着就晕了，我最开始学看源码的时候就这样
      * 后来看得多了，我给自己总结了一句话：看抽象类的时候只要记住我们最终创建的那个类是各个抽象类和各种接口的最终子类，一直记着这句话
      * 看源码时候就会清楚很多，不管抽象父类怎么调用子类方法，实际上都是在我们创建的最终子类中调来调去。
+     *
+     * 这里的promise作为是为了异步，阻塞其他线程的sync
+     * 不光是 register connect read write  都会传入一个异步promise
      * @param eventLoop
      * @param promise
      */
@@ -125,6 +128,7 @@ public abstract class AbstractChannel implements Channel{
             return;
         }
         //判断当前使用的执行器是否为NioEventLoop，如果不是手动设置失败
+        // isCompatible 是子类实现的 主要是判断一下eventLoop是不是对应的事件循环实现类 比如说 nio bio等
         if (!isCompatible(eventLoop)) {
             promise.setFailure(new IllegalStateException("incompatible event loop type: " + eventLoop.getClass().getName()));
             return;
@@ -161,6 +165,7 @@ public abstract class AbstractChannel implements Channel{
      */
     private void register0(ChannelPromise promise) {
         try {
+            // ensureOpen(promise) channel 是否打开
             if (!promise.setUncancellable() || !ensureOpen(promise)) {
                 return;
             }
@@ -254,6 +259,7 @@ public abstract class AbstractChannel implements Channel{
     }
 
 
+    // 可以看到 CloseFuture 只能调用setClosed设置结果，其余都会抛出异常
     static final class CloseFuture extends DefaultChannelPromise {
 
         CloseFuture(AbstractChannel ch) {

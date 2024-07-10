@@ -94,7 +94,7 @@ public class NioSocketChannel extends AbstractNioByteChannel {
         try {
             //SocketUtils.connect(javaChannel(), remoteAddress)该方法如果连接成功就直接返回true
             //如果没有接收到服务端的ack就会返回false，但并不意味着该方法就彻底失败了，有可能ack在路上等等，最终需要注册连接事件来监听结果
-            //这会让AbstractNioChannel类中的connect方法进入到添加定时任务的分支，如果超过设定的时间一直没有连接成功，就会在客户端报错
+            // todo 这会让AbstractNioChannel类中的connect方法进入到添加定时任务的分支，如果超过设定的时间一直没有连接成功，就会在客户端报错
             //如果连接成功了，连接成功的时候会把该定时任务中的某些变量置为null,现在我们还没有加入定时任务
             //这里会返回false
             boolean connected = SocketUtils.connect(javaChannel(), remoteAddress);

@@ -114,6 +114,7 @@ public class Bootstrap<C extends Channel> {
                     channel.connect(remoteAddress,null, connectPromise);
                 }
                 //添加该监听器，如果channel连接失败，该监听器会关闭该channel
+                // 就算 promise 完成了  监听器也能被调用  因为每次添加都会判断isDone
                 connectPromise.addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
             }
         });
