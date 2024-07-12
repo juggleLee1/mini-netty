@@ -60,6 +60,7 @@ public class ServerBootstrap extends AbstractBootstrap<ServerBootstrap, Channel>
      * 里面的每个线程执行器也都初始化完毕
      */
     public ServerBootstrap group(EventLoopGroup parentGroup, EventLoopGroup childGroup) {
+        // parentGroup 用来接收 连接  和 serverSocketChannel 有关； childGroup 用来处理IO事件  和 socketchannel有关
         super.group(parentGroup);
         ObjectUtil.checkNotNull(childGroup, "childGroup");
         if (this.childGroup != null) {
