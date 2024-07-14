@@ -35,6 +35,8 @@ public class DefaultChannelPipeline implements ChannelPipeline{
      *但我们这里先不引入，先讲完核心的地方。实际上这个很简单，无非就是java原生用ThreadLocalMap用hashmap那一套存储数据，
      * 而作者定义的则拥有一个初始化好的数组下标，根据下标存储数据到数组中，不会因为hash冲突浪费继续寻找空位的时间，感兴趣的同学可以点开源码看一看，如果前面的那些课程你都懂了，你会发现，netty
      * 的许多源码你自己都可以看明白了。这里我们就先不引入了，用原生的java的ThreadLocal代替
+     *
+     * 这里缓存了每个 handler 名字
      */
 //    private static final FastThreadLocal<Map<Class<?>, String>> nameCaches =
 //            new FastThreadLocal<Map<Class<?>, String>>() {
