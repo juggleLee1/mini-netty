@@ -103,9 +103,11 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
         }
         //走到这里说明设置失败了，意味着任务不可取消，这就对应两种结果，一是任务已经执行成功了，无法取消
         //二就是任务已经被别的线程取消了。
+        //第三种情况就是 任务已经被其他线程设置为不可取消了
         Object result = this.result;
         //这里的结果只能二选一，执行成功或者已经被取消，不可能出现执行成功了也被取消了，也不可能出现没执行成功也没取消，这样的话
         //就会在前面被原子更新器更新了
+        // 如果是 1 2情况 则返回false  如果是第三种情况 就返回true
         return !isDone0(result) || !isCancelled0(result);
     }
 
@@ -426,7 +428,7 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     protected void checkDeadLock() {
         //得到执行器
         EventExecutor e = executor();
-        //判断是否为死锁，之前已经解释过这个问题了
+        //判断是否为死锁，之前已经解释过这个问题了；因为执行器是单线程
         if (e != null && e.inEventLoop(Thread.currentThread())) {
             throw new BlockingOperationException(toString());
         }
