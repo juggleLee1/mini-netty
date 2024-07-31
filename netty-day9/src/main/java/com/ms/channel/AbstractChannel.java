@@ -83,7 +83,7 @@ public abstract class AbstractChannel implements Channel{
     }
 
     //在源码中config类并不在这里实现，而是放在了niosocketchannel和nioserversocketchannel
-    //中分别实现，这么做是因为客户端和服务端的配置并相同，所以要分别作处理，这也是定义公共接口
+    //中分别实现，这么做是因为客户端和服务端的配置并不相同，所以要分别作处理，这也是定义公共接口
     //子类各自实现的一种体现
     //@Override
     //public ChannelConfig config() {
@@ -266,7 +266,6 @@ public abstract class AbstractChannel implements Channel{
      * 首先，channel分为客户端和服务端，因为抽象出了公共的接口和父抽象类，两种channel不得不实现相同的方法，
      * 那么不同的channel实现的相同方法的逻辑应该不同，所以dobind设计为抽象方法是很合理的。因为你不能让NiosocketChannel客户端channel
      * 向服务端channel那样去绑定端口，虽然要做也确实可以这么做。。
-     * 按照我的这种思路，大家可以思考思考，为什么继承了同样的接口，有的方法可以出现在这个抽象类中，有的方法可以出现在那个抽象类中，为什么有的方法要设计成抽象的
      */
     protected abstract class AbstractUnsafe implements Unsafe {
 
