@@ -149,8 +149,7 @@ public class NioEventLoop extends SingleThreadEventLoop {
             int ops = k.interestOps();
             //如果是连接事件
             if (ops == SelectionKey.OP_CONNECT) {
-                //移除连接事件，否则会一直通知，这里实际上是做了个减法。位运算的门道，我们会放在之后和线程池的状态切换一起讲
-                //这里先了解就行
+                //移除连接事件，否则会一直通知，这里实际上是做了个减法。
                 ops &= ~SelectionKey.OP_CONNECT;
                 //重新把感兴趣的事件注册一下
                 k.interestOps(ops);
@@ -160,9 +159,6 @@ public class NioEventLoop extends SingleThreadEventLoop {
             //如果是读事件，不管是客户端还是服务端的，都可以直接调用read方法
             //这时候一定要记清楚，NioSocketChannel和NioServerSocketChannel并不会纠缠
             //用户创建的是哪个channel，这里抽象类调用就是它的方法
-            //如果不明白，那么就找到AbstractNioChannel的方法看一看，想一想，虽然那里传入的参数是this，但传入的并不是抽象类本身，想想你创建的
-            //是NioSocketChannel还是NioServerSocketChannel，是哪个，传入的就是哪个。只不过在这里被多态赋值给了抽象类
-            //创建的是子类对象，但在父类中调用了this，得到的仍然是子类对象
             if (ops ==  SelectionKey.OP_READ) {
                 ch.read();
             }
