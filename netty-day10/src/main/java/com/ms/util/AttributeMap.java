@@ -2,8 +2,7 @@ package com.ms.util;
 
 
 /**
- * @Author: PP-jessica
- * @Description:netty自定义的map接口，该接口的实现类是一个map，
+ * netty自定义的map接口，该接口的实现类是一个map，
  */
 public interface AttributeMap {
 

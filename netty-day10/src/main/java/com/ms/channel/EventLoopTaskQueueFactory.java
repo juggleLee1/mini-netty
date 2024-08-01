@@ -3,8 +3,7 @@ package com.ms.channel;
 import java.util.Queue;
 
 /**
- * @Author: PP-jessica
- * @Description:创建任务队列的工厂
+ * 创建任务队列的工厂
  */
 public interface EventLoopTaskQueueFactory {
 

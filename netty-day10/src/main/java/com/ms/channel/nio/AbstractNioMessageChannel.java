@@ -9,8 +9,7 @@ import java.util.List;
 public abstract class AbstractNioMessageChannel extends AbstractNioChannel {
 
     /**
-     * @Author: PP-jessica
-     * @Description:当该属性为true时，服务端将不再接受来自客户端的数据
+     * 当该属性为true时，服务端将不再接受来自客户端的数据
      */
     boolean inputShutdown;
 
@@ -33,8 +32,7 @@ public abstract class AbstractNioMessageChannel extends AbstractNioChannel {
 
     private final class NioMessageUnsafe extends AbstractNioUnsafe {
         /**
-         * @Author: PP-jessica
-         * @Description:该属性也回到了正确的位置
+         * 该属性也回到了正确的位置
          */
         private final List<Object> readBuf = new ArrayList<Object>();
 

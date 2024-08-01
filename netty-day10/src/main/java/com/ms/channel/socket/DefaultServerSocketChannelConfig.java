@@ -13,8 +13,7 @@ import static com.ms.util.internal.ObjectUtil.checkPositiveOrZero;
 
 
 /**
- * @Author: PP-jessica
- * @Description:NioServerSocketChannel默认使用的配置类，这里面的方法都特别简单，基本都是调用的父类方法，debug的时候顺着逻辑
+ * NioServerSocketChannel默认使用的配置类，这里面的方法都特别简单，基本都是调用的父类方法，debug的时候顺着逻辑
  * 一直点就行
  */
 public class DefaultServerSocketChannelConfig extends DefaultChannelConfig
@@ -22,16 +21,16 @@ public class DefaultServerSocketChannelConfig extends DefaultChannelConfig
 
     protected final ServerSocket javaSocket;
     /**
-     * @Author: PP-jessica
-     * @Description:这个参数我记得之前提到一次，在非windows环境下，默认都是128，这里我们就直接写死，不引入更多的工具类了
+     * 这个参数我记得之前提到一次，在非windows环境下，默认都是128，这里我们就直接写死，不引入更多的工具类了
      * 反正只要用户配置了，就不会采用默认数值
      */
     private volatile int backlog = 128;
 
     /**
-     * @Author: PP-jessica
-     * @Description:这里第一个参数并不是NioServerSocketChannel类型，而是netty自己实现的ServerSocketChannel接口类型
+     * 这里第一个参数并不是NioServerSocketChannel类型，而是netty自己实现的ServerSocketChannel接口类型
      * 但这类接口没有引入的必要了，所以我就直接把NioServerSocketChannel这个类型放在这里了
+     * @param channel
+     * @param javaSocket
      */
     public DefaultServerSocketChannelConfig(NioServerSocketChannel channel, ServerSocket javaSocket) {
         super(channel);

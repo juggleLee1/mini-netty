@@ -7,9 +7,9 @@ import com.ms.util.concurrent.Future;
 import com.ms.util.concurrent.GenericFutureListener;
 
 import static com.ms.util.internal.ObjectUtil.checkNotNull;
+
 /**
- * @Author: PP-jessica
- * @Description:默认的实现类，服务端和客户端中得到的channelFuture，实际上就是该实现类。
+ * 默认的实现类，服务端和客户端中得到的channelFuture，实际上就是该实现类。
  */
 public class DefaultChannelPromise extends DefaultPromise<Void> implements ChannelPromise {
 

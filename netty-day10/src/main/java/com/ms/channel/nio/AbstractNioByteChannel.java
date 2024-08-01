@@ -19,8 +19,7 @@ public abstract class AbstractNioByteChannel extends AbstractNioChannel{
 
     protected class NioByteUnsafe extends AbstractNioUnsafe {
         /**
-         * @Author: PP-jessica
-         * @Description:该方法回到了正确的位置
+         * 该方法回到了正确的位置
          */
         @Override
         public final void read() {

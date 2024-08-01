@@ -19,8 +19,7 @@ import java.nio.channels.spi.SelectorProvider;
 import java.util.Map;
 
 /**
- * @Author: PP-jessica
- * @Description:对socketchannel做了一层包装，同时也因为channel接口和抽象类的引入，终于可以使NioEventLoop和channel解耦了
+ * 对socketchannel做了一层包装，同时也因为channel接口和抽象类的引入，终于可以使NioEventLoop和channel解耦了
  */
 public class NioSocketChannel extends AbstractNioByteChannel {
 
@@ -38,8 +37,7 @@ public class NioSocketChannel extends AbstractNioByteChannel {
     private final SocketChannelConfig config;
 
     /**
-     * @Author: PP-jessica
-     * @Description:无参构造器，netty客户端初始化的时候，channel工厂反射调用的就是这个构造器
+     * 无参构造器，netty客户端初始化的时候，channel工厂反射调用的就是这个构造器
      */
     public NioSocketChannel() {
         this(DEFAULT_SELECTOR_PROVIDER);
@@ -103,8 +101,9 @@ public class NioSocketChannel extends AbstractNioByteChannel {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:这里是一个系统调用方法，判断当前的java版本是否为7以上，这里我就直接写死了，默认用的都是java8，不引入更多的工具类了
+     * 这里是一个系统调用方法，判断当前的java版本是否为7以上，这里我就直接写死了，默认用的都是java8，不引入更多的工具类了
+     * @param localAddress
+     * @throws Exception
      */
     private void doBind0(SocketAddress localAddress) throws Exception {
             SocketUtils.bind(javaChannel(), localAddress);
@@ -181,8 +180,7 @@ public class NioSocketChannel extends AbstractNioByteChannel {
 
 
     /**
-     * @Author: PP-jessica
-     * @Description:用户设置的客户端channel的参数由此类进行设置，这里面有的方法现在还不需要是用来干什么的，等学完ByteBuf了会全部讲解
+     * 用户设置的客户端channel的参数由此类进行设置，这里面有的方法现在还不需要是用来干什么的，等学完ByteBuf了会全部讲解
      */
     private final class NioSocketChannelConfig extends DefaultSocketChannelConfig {
         private volatile int maxBytesPerGatheringWrite = Integer.MAX_VALUE;

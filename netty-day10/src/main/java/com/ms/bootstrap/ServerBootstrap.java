@@ -32,8 +32,9 @@ public class ServerBootstrap<C extends Channel> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:创建channel的工厂
+     * 创建channel的工厂
+     * @param channelClass
+     * @return
      */
     public ServerBootstrap channel(Class<? extends C> channelClass) {
         this.channelFactory = new ReflectiveChannelFactory<C>(channelClass);
@@ -73,7 +74,6 @@ public class ServerBootstrap<C extends Channel> {
         }else {
             //走到这里，说明上面的initAndRegister方法中，服务端的channel还没有完全注册到单线程执行器的selector上
             //此时可以直接则向regFuture添加回调函数，这里有个专门的静态内部类，用来协助判断服务端channel是否注册成功
-            //该回调函数会在regFuture完成的状态下被调用，在回调函数中进行服务端的绑定，回顾一下第四课就明白了。
             final PendingRegistrationPromise promise = new PendingRegistrationPromise(channel);
             regFuture.addListener(new ChannelFutureListener() {
                 @Override
@@ -134,8 +134,8 @@ public class ServerBootstrap<C extends Channel> {
 
 
         /**
-         * @Author: PP-jessica
-         * @Description:该方法简化一下，全局的执行器不是必须引入的
+         * 该方法简化一下，全局的执行器不是必须引入的
+         * @return
          */
         @Override
         protected EventExecutor executor() {

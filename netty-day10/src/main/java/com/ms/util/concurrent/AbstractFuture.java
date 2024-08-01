@@ -7,8 +7,8 @@ import java.util.concurrent.TimeoutException;
 
 
 /**
- * @Author: PP-jessica
- * @Description:作为抽象类，定义了get方法的模版让子类使用
+ * 作为抽象类，定义了get方法的模版让子类使用
+ * @param <V>
  */
 public abstract class AbstractFuture<V> implements Future<V> {
 

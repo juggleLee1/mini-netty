@@ -7,8 +7,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadFactory;
 
 /**
- * @Author: PP-jessica
- * @Description:线程创建执行器，netty的执行器中运行的线程都是由这个执行器创建的
+ * 线程创建执行器，netty的执行器中运行的线程都是由这个执行器创建的
  */
 public class ThreadPerTaskExecutor implements Executor {
 

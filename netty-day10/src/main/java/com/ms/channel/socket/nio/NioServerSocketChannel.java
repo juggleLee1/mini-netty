@@ -20,8 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Author: PP-jessica
- * @Description:对serversocketchannel做了一层包装，同时也因为channel接口和抽象类的引入，终于可以使NioEventLoop和channel解耦了
+ * 对serversocketchannel做了一层包装，同时也因为channel接口和抽象类的引入，终于可以使NioEventLoop和channel解耦了
  */
 public class NioServerSocketChannel extends AbstractNioMessageChannel {
 
@@ -39,8 +38,7 @@ public class NioServerSocketChannel extends AbstractNioMessageChannel {
     private final ServerSocketChannelConfig config;
 
     /**
-     * @Author: PP-jessica
-     * @Description:无参构造，当调用该构造器的时候，会调用到静态方法newSocket，返回一个ServerSocketChannel
+     * 无参构造，当调用该构造器的时候，会调用到静态方法newSocket，返回一个ServerSocketChannel
      */
     public NioServerSocketChannel() {
         this(newSocket(DEFAULT_SELECTOR_PROVIDER));
@@ -108,8 +106,10 @@ public class NioServerSocketChannel extends AbstractNioMessageChannel {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:该方法是服务端channel接受连接的方法
+     * 该方法是服务端channel接受连接的方法
+     * @param buf
+     * @return
+     * @throws Exception
      */
     @Override
     protected int doReadMessages(List<Object> buf) throws Exception {
@@ -134,8 +134,11 @@ public class NioServerSocketChannel extends AbstractNioMessageChannel {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:这里做空实现即可，服务端的channel并不会做连接动作
+     * 这里做空实现即可，服务端的channel并不会做连接动作
+     * @param remoteAddress
+     * @param localAddress
+     * @return
+     * @throws Exception
      */
     @Override
     protected boolean doConnect(SocketAddress remoteAddress, SocketAddress localAddress) throws Exception {
@@ -154,8 +157,7 @@ public class NioServerSocketChannel extends AbstractNioMessageChannel {
 
 
     /**
-     * @Author: PP-jessica
-     * @Description:引入该内部类，该内部类最终会把用户配置的channel参数真正传入jdk的channel中
+     * 引入该内部类，该内部类最终会把用户配置的channel参数真正传入jdk的channel中
      * NioSocketChannel那边同理
      */
     private final class NioServerSocketChannelConfig extends DefaultServerSocketChannelConfig {
@@ -189,8 +191,8 @@ public class NioServerSocketChannel extends AbstractNioMessageChannel {
         }
 
         /**
-         * @Author: PP-jessica
-         * @Description: 这个方法得到的就是jdk的channel
+         * 这个方法得到的就是jdk的channel
+         * @return
          */
         private ServerSocketChannel jdkChannel() {
             return ((NioServerSocketChannel) channel).javaChannel();

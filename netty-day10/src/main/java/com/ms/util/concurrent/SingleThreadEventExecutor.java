@@ -10,8 +10,7 @@ import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 
 
 /**
- * @Author: PP-jessica
- * @Description:单线程执行器，实际上这个类就是一个单线程的线程池，netty中所有任务都是被该执行器执行的
+ * 单线程执行器，实际上这个类就是一个单线程的线程池，netty中所有任务都是被该执行器执行的
  * 既然是执行器(虽然该执行器中只有一个无限循环的线程工作)，但执行器应该具备的属性也不可少，比如任务队列，拒绝策略等等
  * 暂时让该类最为执行器的顶层类,在源码中该类还有两层继承的类
  */
@@ -63,14 +62,13 @@ public abstract class SingleThreadEventExecutor implements EventExecutor {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:该方法在nioeventloop中实现，是真正执行轮询的方法
+     * 该方法在nioeventloop中实现，是真正执行轮询的方法
      */
     protected abstract void run();
 
     /**
-     * @Author: PP-jessica
-     * @Description:执行器执行任务
+     * 执行器执行任务
+     * @param task the runnable task
      */
     @Override
     public void execute(Runnable task) {
@@ -122,8 +120,9 @@ public abstract class SingleThreadEventExecutor implements EventExecutor {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:判断当前执行任务的线程是否是执行器的线程。这个方法至关重要，现在先有个印象
+     * 判断当前执行任务的线程是否是执行器的线程。这个方法至关重要，现在先有个印象
+     * @param thread
+     * @return
      */
     @Override
     public boolean inEventLoop(Thread thread) {
@@ -131,8 +130,8 @@ public abstract class SingleThreadEventExecutor implements EventExecutor {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:判断任务队列中是否有任务
+     * 判断任务队列中是否有任务
+     * @return
      */
     protected boolean hasTasks() {
         return !taskQueue.isEmpty();
@@ -195,8 +194,7 @@ public abstract class SingleThreadEventExecutor implements EventExecutor {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description: 中断单线程执行器中的线程
+     * 中断单线程执行器中的线程
      */
     protected void interruptThread() {
         Thread currentThread = thread;

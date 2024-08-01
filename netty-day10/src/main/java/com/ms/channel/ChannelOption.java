@@ -8,8 +8,8 @@ import java.net.NetworkInterface;
 
 
 /**
- * @Author: PP-jessica
- * @Description:我们真正使用的常量类，这里面我删除了一些方法，都是被作者废弃了的方法
+ * 我们真正使用的常量类，这里面我删除了一些方法，都是被作者废弃了的方法
+ * @param <T>
  */
 public class ChannelOption<T> extends AbstractConstant<ChannelOption<T>> {
 
@@ -37,8 +37,7 @@ public class ChannelOption<T> extends AbstractConstant<ChannelOption<T>> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:在源码中，下面的这些属性都是作者已经创建好的常量，看看有没有你熟悉的。
+     * 在源码中，下面的这些属性都是作者已经创建好的常量，看看有没有你熟悉的。
      */
     public static final ChannelOption<Integer> CONNECT_TIMEOUT_MILLIS = valueOf("CONNECT_TIMEOUT_MILLIS");
     // 控制 写操作的循环次数
@@ -59,8 +58,7 @@ public class ChannelOption<T> extends AbstractConstant<ChannelOption<T>> {
     // 关闭的延迟时间
     public static final ChannelOption<Integer> SO_LINGER = valueOf("SO_LINGER");
     /**
-     * @Author: PP-jessica
-     * @Description:记得我们给channel配置的参数吗option(ChannelOption.SO_BACKLOG,128)，是不是很熟悉，我们拿来即用的常量，因为作者
+     * 记得我们给channel配置的参数吗option(ChannelOption.SO_BACKLOG,128)，是不是很熟悉，我们拿来即用的常量，因为作者
      * 已经创建好了。这里我多说一句，不要被ChannelOption<T>中的泛型给迷惑了，觉得ChannelOption中也存储着
      * 用户定义的值，就是那个泛型的值，比如说option(ChannelOption.SO_BACKLOG,128)里面的128，以为ChannelOption<Integer>中的integer
      * 存储的就是128，实际上128存储在serverbootstrap的linkmap中。而作者之所以给常量类设定泛型，是因为Attribut会存储泛型的值，这个我们在这节课

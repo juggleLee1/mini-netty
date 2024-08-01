@@ -5,15 +5,14 @@ import java.util.concurrent.atomic.AtomicLong;
 
 
 /**
- * @Author: PP-jessica
- * @Description:这里面的方法应该都很好理解，都是最基础的几个方法
+ * 这里面的方法应该都很好理解，都是最基础的几个方法
  * T 必须是 AbstractConstant<T> 的一个子类，这样可以在子类中保留类型信息。
+ * @param <T>
  */
 public abstract class AbstractConstant<T extends AbstractConstant<T>> implements Constant<T> {
 
     /**
-     * @Author: PP-jessica
-     * @Description:这个long类型的id是用来比较常量大小的
+     * 这个long类型的id是用来比较常量大小的
      */
     private static final AtomicLong uniqueIdGenerator = new AtomicLong();
     private final int id;

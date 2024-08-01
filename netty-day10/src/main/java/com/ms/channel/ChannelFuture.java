@@ -4,10 +4,8 @@ import com.ms.util.concurrent.Future;
 import com.ms.util.concurrent.GenericFutureListener;
 
 
-
 /**
- * @Author: PP-jessica
- * @Description:和channel有关的future
+ * 和channel有关的future
  */
 public interface ChannelFuture extends Future<Void> {
 

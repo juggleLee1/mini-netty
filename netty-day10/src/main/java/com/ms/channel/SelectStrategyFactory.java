@@ -2,8 +2,7 @@ package com.ms.channel;
 
 
 /**
- * @Author: PP-jessica
- * @Description: 选择工厂
+ * 选择工厂
  */
 public interface SelectStrategyFactory {
 

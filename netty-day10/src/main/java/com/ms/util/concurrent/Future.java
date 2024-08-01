@@ -4,8 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 
 /**
- * @Author: PP-jessica
- * @Description:netty中重写了该接口，添加了一些重要的方法
+ * netty中重写了该接口，添加了一些重要的方法
+ * @param <V>
  */
 public interface Future<V> extends java.util.concurrent.Future<V> {
 

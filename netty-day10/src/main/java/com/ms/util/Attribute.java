@@ -1,8 +1,8 @@
 package com.ms.util;
 
 /**
- * @Author: PP-jessica
- * @Description:该接口是AttributeMap中存储的value的实现类的接口
+ * 该接口是AttributeMap中存储的value的实现类的接口
+ * @param <T>
  */
 public interface Attribute<T> {
 

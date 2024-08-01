@@ -85,8 +85,7 @@ public abstract class AbstractNioChannel extends AbstractChannel {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:终于又引入了一个unsafe的抽象内部类
+     * 终于又引入了一个unsafe的抽象内部类
      */
     protected abstract class AbstractNioUnsafe extends AbstractUnsafe implements NioUnsafe {
 
@@ -96,8 +95,10 @@ public abstract class AbstractNioChannel extends AbstractChannel {
         }
 
         /**
-         * @Author: PP-jessica
-         * @Description:该方法回到了原本的位置
+         * 该方法回到了原本的位置
+         * @param remoteAddress
+         * @param localAddress
+         * @param promise
          */
         @Override
         public final void connect(final SocketAddress remoteAddress, final SocketAddress localAddress, final ChannelPromise promise) {
@@ -127,8 +128,7 @@ public abstract class AbstractNioChannel extends AbstractChannel {
         }
 
         /**
-         * @Author: PP-jessica
-         * @Description:现在要实现这个方法了，仍然是简单实现，以后会完善至源码的程度
+         * 现在要实现这个方法了，仍然是简单实现，以后会完善至源码的程度
          */
         @Override
         public final void finishConnect() {
@@ -174,8 +174,8 @@ public abstract class AbstractNioChannel extends AbstractChannel {
     protected abstract void doFinishConnect() throws Exception;
 
     /**
-     * @Author: PP-jessica
-     * @Description:该方法先不实现，在引入了channelHandler后会实现
+     * 该方法先不实现，在引入了channelHandler后会实现
+     * @throws Exception
      */
     @Override
     protected void doClose() throws Exception {}

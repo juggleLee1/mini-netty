@@ -2,8 +2,8 @@ package com.ms.util;
 
 
 /**
- * @Author: PP-jessica
- * @Description:该类也是一个常量类，把map的key包装为常量
+ * 该类也是一个常量类，把map的key包装为常量
+ * @param <T>
  */
 public final class AttributeKey<T> extends AbstractConstant<AttributeKey<T>> {
 
@@ -15,8 +15,10 @@ public final class AttributeKey<T> extends AbstractConstant<AttributeKey<T>> {
     };
 
     /**
-     * @Author: PP-jessica
-     * @Description:创建key的方法
+     * 创建key的方法
+     * @param name
+     * @return
+     * @param <T>
      */
     @SuppressWarnings("unchecked")
     public static <T> AttributeKey<T> valueOf(String name) {

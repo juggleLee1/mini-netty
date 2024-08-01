@@ -4,8 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
- * @Author: PP-jessica
- * @Description:执行器选择工厂的实现类
+ * 执行器选择工厂的实现类
  */
 public final class DefaultEventExecutorChooserFactory implements EventExecutorChooserFactory {
 

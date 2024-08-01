@@ -9,16 +9,13 @@ import static com.ms.util.internal.ObjectUtil.checkPositive;
 import static com.ms.util.internal.ObjectUtil.checkPositiveOrZero;
 
 /**
- * @Author: PP-jessica
- * @Description:该类是NioSocketChannel和NioServerSocketChannel的公共父类，这里面有一些方法没做实现，之后讲到了会实现
- * 不过，只要是该类实现了的方法，都很简单，结合本节课的测试用例debug，很顺利就可以看懂。
+ * 该类是NioSocketChannel和NioServerSocketChannel的公共父类，这里面有一些方法没做实现，之后讲到了会实现
  */
 public class DefaultChannelConfig implements ChannelConfig{
 
     private static final int DEFAULT_CONNECT_TIMEOUT = 30000;
     /**
-     * @Author: PP-jessica
-     * @Description:原子更新器，改变是否自动读的值，自动读这个属性很重要，讲到channelHandler的时候会派上用场
+     * 原子更新器，改变是否自动读的值，自动读这个属性很重要，讲到channelHandler的时候会派上用场
      */
     private static final AtomicIntegerFieldUpdater<DefaultChannelConfig> AUTOREAD_UPDATER =
             AtomicIntegerFieldUpdater.newUpdater(DefaultChannelConfig.class, "autoRead");
@@ -27,8 +24,7 @@ public class DefaultChannelConfig implements ChannelConfig{
 
     private volatile int connectTimeoutMillis = DEFAULT_CONNECT_TIMEOUT;
     /**
-     * @Author: PP-jessica
-     * @Description:写自旋次数也是个很重要的属性，默认值为16。这里我们还用不到它，先引入混个眼熟
+     * 写自旋次数也是个很重要的属性，默认值为16
      */
     private volatile int writeSpinCount = 16;
 
@@ -42,8 +38,8 @@ public class DefaultChannelConfig implements ChannelConfig{
 
 
     /**
-     * @Author: PP-jessica
-     * @Description:该方法是返回存储所有常量类和常量类对应的值的map
+     * 该方法是返回存储所有常量类和常量类对应的值的map
+     * @return
      */
     @Override
     @SuppressWarnings("deprecation")
@@ -171,8 +167,7 @@ public class DefaultChannelConfig implements ChannelConfig{
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:该方法暂时不在子类中实现
+     * 该方法暂时不在子类中实现
      */
     protected void autoReadCleared() { }
 

@@ -14,8 +14,8 @@ public interface ChannelPromise extends ChannelFuture, Promise<Void> {
     ChannelPromise setSuccess(Void result);
 
     /**
-     * @Author: PP-jessica
-     * @Description:这个方法和下面的方法是本接口中定义的
+     * 这个方法和下面的方法是本接口中定义的
+     * @return
      */
     ChannelPromise setSuccess();
 

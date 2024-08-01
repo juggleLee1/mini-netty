@@ -2,8 +2,7 @@ package com.ms.util.concurrent;
 
 
 /**
- * @Author: PP-jessica
- * @Description:执行器选择工厂接口
+ * 执行器选择工厂接口
  */
 public interface EventExecutorChooserFactory {
 

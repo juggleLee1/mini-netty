@@ -18,8 +18,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * @Author: PP-jessica
- * @Description:该类就是真正执行循环事件的类，nio中selector轮询事件，包括处理事件，都在该类中进行
+ * 该类就是真正执行循环事件的类，nio中selector轮询事件，包括处理事件，都在该类中进行
  */
 public class NioEventLoop extends SingleThreadEventLoop {
 
@@ -72,8 +71,7 @@ public class NioEventLoop extends SingleThreadEventLoop {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:在这里进行选择器的轮询
+     * 在这里进行选择器的轮询
      */
     @Override
     @SuppressWarnings("InfiniteLoopStatement")
@@ -134,10 +132,12 @@ public class NioEventLoop extends SingleThreadEventLoop {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:既然都引入了channel，那么nioeventloop也可以和socketChannel，serverSocketChannel解耦了
+     * 既然都引入了channel，那么nioeventloop也可以和socketChannel，serverSocketChannel解耦了
      * 这里要重写该方法，现在应该发现了，AbstractNioChannel作为抽象类，既可以调用服务端channel的方法，也可以调用客户端channel的
      * 方法，这就巧妙的把客户端和服务端的channel与nioEventLoop解耦了
+     * @param k
+     * @param ch
+     * @throws Exception
      */
     private void processSelectedKey(SelectionKey k,AbstractNioChannel ch) throws Exception {
         try {

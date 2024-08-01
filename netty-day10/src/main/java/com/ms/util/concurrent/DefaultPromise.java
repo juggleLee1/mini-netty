@@ -11,11 +11,11 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 
 /**
- * @Author: PP-jessica
- * @Description:promise的默认实现类，在netty中，这个可以看作一个不完整的futuretask，他们二者的区别在于futuretask可以作为一个任务
+ * promise的默认实现类，在netty中，这个可以看作一个不完整的futuretask，他们二者的区别在于futuretask可以作为一个任务
  * 被线程或线程池执行，不能手动设置结果。而该类则不能当做任务被线程或线程池执行，但可以手动把外部线程得到的结果赋值给result属性
  * 那么netty中有没有类似futureTask的类呢？当然是有的，就是PromiseTask，该类继承了DefaultPromise类，可以当作任务被线程池或线程执行。
  * 具体实现可以去看netty的源码，只要你理解了futureTask，会发现PromiseTask非常简单，大部分方法都是调用的父类方法。
+ * @param <V>
  */
 public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
 
@@ -50,16 +50,17 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:得到传入的执行器
+     * 得到传入的执行器
+     * @return
      */
     protected EventExecutor executor() {
         return executor;
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:promise和future的区别就是，promise可以让用户自己设置成功的返回值，也可以设置失败后返回的错误
+     * promise和future的区别就是，promise可以让用户自己设置成功的返回值，也可以设置失败后返回的错误
+     * @param result
+     * @return
      */
     @Override
     public Promise<V> setSuccess(V result) {
@@ -71,8 +72,9 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:该方法和上面的方法作用相同，不过这个方法在设置失败时不会抛出异常，而是直接返回false
+     * 该方法和上面的方法作用相同，不过这个方法在设置失败时不会抛出异常，而是直接返回false
+     * @param result
+     * @return
      */
     @Override
     public boolean trySuccess(V result) {
@@ -93,8 +95,8 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:设置当前的任务为不可取消
+     * 设置当前的任务为不可取消
+     * @return
      */
     @Override
     public boolean setUncancellable() {
@@ -123,8 +125,8 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:获取任务执行时的异常
+     * 获取任务执行时的异常
+     * @return
      */
     @Override
     public Throwable cause() {
@@ -153,8 +155,9 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:添加多个监听器
+     * 添加多个监听器
+     * @param listeners
+     * @return
      */
     @Override
     public Promise<V> addListeners(GenericFutureListener<? extends Future<? super V>>... listeners) {
@@ -203,9 +206,10 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:该方法在AbstractFuture抽象类中被调用了，当执行还没有结果的时候，外部线程调用get方法时，会进一步调用
-     * 该方法进行阻塞。
+     * 该方法在AbstractFuture抽象类中被调用了，当执行还没有结果的时候，外部线程调用get方法时，会进一步调用
+     * 该方法进行阻塞
+     * @return
+     * @throws InterruptedException
      */
     @Override
     public Promise<V> await() throws InterruptedException {
@@ -242,8 +246,8 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
 
 
     /**
-     * @Author: PP-jessica
-     * @Description:该方法与上面的方法作用相同，只是不会抛出异常
+     * 该方法与上面的方法作用相同，只是不会抛出异常
+     * @return
      */
     @Override
     public Promise<V> awaitUninterruptibly() {
@@ -274,8 +278,11 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
 
 
     /**
-     * @Author: PP-jessica
-     * @Description:支持超时时间的await方法
+     * 支持超时时间的await方法
+     * @param timeout
+     * @param unit
+     * @return
+     * @throws InterruptedException
      */
     @Override
     public boolean await(long timeout, TimeUnit unit) throws InterruptedException {
@@ -307,8 +314,8 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:非阻塞获取执行后的结果，如果结果尚未出来，直接返回null
+     * 非阻塞获取执行后的结果，如果结果尚未出来，直接返回null
+     * @return
      */
     @Override
     public V getNow() {
@@ -320,8 +327,11 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:取消当前的任务
+     * 取消当前的任务
+     * @param mayInterruptIfRunning {@code true} if the thread executing this
+     * task should be interrupted; otherwise, in-progress tasks are allowed
+     * to complete
+     * @return
      */
     @Override
     public boolean cancel(boolean mayInterruptIfRunning) {
@@ -351,9 +361,10 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:该方法和下面的方法应该是大家最熟悉的，区别就是是否抛出异常
+     * 该方法和下面的方法应该是大家最熟悉的，区别就是是否抛出异常
      * 服务器和客户端经常会调用该方法同步等待结果
+     * @return
+     * @throws InterruptedException
      */
     @Override
     public Promise<V> sync() throws InterruptedException {
@@ -370,8 +381,7 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:一个私有的静态内部类，对异常的包装
+     * 一个私有的静态内部类，对异常的包装
      */
     private static final class CauseHolder {
 
@@ -414,8 +424,7 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:检查是否为死锁的方法
+     * 检查是否为死锁的方法
      */
     protected void checkDeadLock() {
         //得到执行器
@@ -427,8 +436,10 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:通知监听器开始执行方法
+     * 通知监听器开始执行方法
+     * @param eventExecutor
+     * @param future
+     * @param listener
      */
     protected static void notifyListener(EventExecutor eventExecutor, final Future<?> future, final GenericFutureListener<?> listener) {
         checkNotNull(eventExecutor, "eventExecutor");
@@ -448,8 +459,7 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:通知所有的监听器开始执行方法
+     * 通知所有的监听器开始执行方法
      */
     private void notifyListeners() {
         //得到执行器
@@ -520,8 +530,9 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
 
 
     /**
-     * @Author: PP-jessica
-     * @Description:通知监听器执行它的方法
+     * 通知监听器执行它的方法
+     * @param future
+     * @param l
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     private static void notifyListener0(Future future, GenericFutureListener l) {
@@ -548,8 +559,8 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:删除监听器
+     * 删除监听器
+     * @param listener
      */
     private void removeListener0(GenericFutureListener<? extends Future<? super V>> listener) {
         //如果监听器是数组类型的，就从数组中删除
@@ -620,8 +631,11 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:真正让线程阻塞等待的方法
+     * 真正让线程阻塞等待的方法
+     * @param timeoutNanos
+     * @param interruptable
+     * @return
+     * @throws InterruptedException
      */
     private boolean await0(long timeoutNanos, boolean interruptable) throws InterruptedException {
         //执行成功则直接返回

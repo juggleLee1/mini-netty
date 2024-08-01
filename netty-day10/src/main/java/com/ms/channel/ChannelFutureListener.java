@@ -4,8 +4,7 @@ import com.ms.util.concurrent.GenericFutureListener;
 
 
 /**
- * @Author: PP-jessica
- * @Description:和channel有关的监听器
+ * 和channel有关的监听器
  */
 public interface ChannelFutureListener extends GenericFutureListener<ChannelFuture> {
 

@@ -3,8 +3,8 @@ package com.ms.util.concurrent;
 import java.util.EventListener;
 
 /**
- * @Author: PP-jessica
- * @Description:监听器的接口
+ * 监听器的接口
+ * @param <F>
  */
 public interface GenericFutureListener<F extends Future<?>> extends EventListener {
 

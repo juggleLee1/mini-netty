@@ -6,8 +6,7 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
 /**
- * @Author: PP-jessica
- * @Description:AttributeMap的实现类，引入该类后，我们就会发现，AbstractChannel实际上继承了该实现类，并且Channel接口继承了
+ * AttributeMap的实现类，引入该类后，我们就会发现，AbstractChannel实际上继承了该实现类，并且Channel接口继承了
  * AttributeMap接口，这说明channel本身也是一个map。netty的作者为什么要搞这样一个map出来呢？好像很多时候我们用netty时根本用不到
  * attr(AttributeKey.valueOf(xxx),xx)这个方法。我本人倒是没怎么用到过，不过该方法可以在map中存储各种数据，
  * 并且只要是在该channel的处理过程中，比如在channelHandler中，就可以获得到这些用户定义的数据，算是一个非常方便的扩展点。
@@ -15,8 +14,7 @@ import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 public class DefaultAttributeMap implements AttributeMap{
 
     /**
-     * @Author: PP-jessica
-     * @Description:原子更新器，这个更新器更新的是map的value的值，在这里，原子更新器是为了解决map添加数据时的并发问题。在hashmap中
+     * 原子更新器，这个更新器更新的是map的value的值，在这里，原子更新器是为了解决map添加数据时的并发问题。在hashmap中
      * 哈希桶是普通的数组，而在这个map中，哈希桶为一个原子引用数组。
      */
     @SuppressWarnings("rawtypes")
@@ -35,8 +33,7 @@ public class DefaultAttributeMap implements AttributeMap{
 
     @SuppressWarnings("unchecked")
     /**
-     * @Author: PP-jessica
-     * @Description:该方法的作用是添加一个数据，并且返回一个Attribute类型的对象
+     * 该方法的作用是添加一个数据，并且返回一个Attribute类型的对象
      * 该对象中封装着map的key和value
      */
     @Override
@@ -107,8 +104,10 @@ public class DefaultAttributeMap implements AttributeMap{
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:判断该map中是否存在该key，逻辑很简单，就不一一分析了
+     * 判断该map中是否存在该key，逻辑很简单，就不一一分析了
+     * @param key
+     * @return
+     * @param <T>
      */
     @Override
     public <T> boolean hasAttr(AttributeKey<T> key) {
@@ -143,10 +142,10 @@ public class DefaultAttributeMap implements AttributeMap{
 
 
     /**
-     * @Author: PP-jessica
-     * @Description:静态内部类，该类继承了AtomicReference，就是AtomicReference类，封装了map数据中的value
+     * 静态内部类，该类继承了AtomicReference，就是AtomicReference类，封装了map数据中的value
      * 很快我们就会在别的地方看到这样一行代码channel.attr(key).set(e.getValue());
      * 其中set方法，就是调用了AtomicReference类中的set方法，把要存储的value存储到AtomicReference类中
+     * @param <T>
      */
     @SuppressWarnings("serial")
     private static final class DefaultAttribute<T> extends AtomicReference<T> implements Attribute<T> {
@@ -154,22 +153,19 @@ public class DefaultAttributeMap implements AttributeMap{
         private static final long serialVersionUID = -2661411462200283011L;
 
         /**
-         * @Author: PP-jessica
-         * @Description:要封装的数据
+         * 要封装的数据
          */
         private final DefaultAttribute<?> head;
         private final AttributeKey<T> key;
 
         /**
-         * @Author: PP-jessica
-         * @Description:前节点和后节点
+         * 前节点和后节点
          */
         private DefaultAttribute<?> prev;
         private DefaultAttribute<?> next;
 
         /**
-         * @Author: PP-jessica
-         * @Description:节点是否被删除了，volatile修饰的变量
+         * 节点是否被删除了，volatile修饰的变量
          */
         private volatile boolean removed;
 

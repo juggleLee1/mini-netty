@@ -7,28 +7,24 @@ import java.net.SocketAddress;
 import java.nio.channels.ClosedChannelException;
 
 /**
- * @Author: PP-jessica
- * @Description:channel接口的抽象实现类，这里面有许多重要方法没有实现，有很多方法没有引进，接下来的几节课会依次引入
+ * channel接口的抽象实现类，这里面有许多重要方法没有实现，有很多方法没有引进，接下来的几节课会依次引入
  * 该类中的bind，close等等方法，都是定义好的模版方法，在子类中有真正的被调用的实现方法，以doxxxx开头。
  */
 public abstract class AbstractChannel extends DefaultAttributeMap implements Channel{
 
     /**
-     * @Author: PP-jessica
-     * @Description:当创建的是客户端channel时，parent为serversocketchannel
+     * 当创建的是客户端channel时，parent为serversocketchannel
      * 如果创建的为服务端channel，parent则为null
      */
     private final Channel parent;
     /**
-     * @Author: PP-jessica
-     * @Description:加入unsafe属性了
+     * 加入unsafe属性了
      */
     private final Unsafe unsafe;
 
     private final ChannelId id;
     /**
-     * @Author: PP-jessica
-     * @Description:看名字也可以猜出，这个future是在channel关闭的时候使用的，是一个静态内部类
+     * 看名字也可以猜出，这个future是在channel关闭的时候使用的，是一个静态内部类
      */
     private final CloseFuture closeFuture = new CloseFuture(this);
 
@@ -39,14 +35,12 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
     private Throwable initialCloseCause;
 
     /**
-     * @Author: PP-jessica
-     * @Description:每一个channel都要绑定到一个eventloop上
+     * 每一个channel都要绑定到一个eventloop上
      */
     private volatile EventLoop eventLoop;
 
     /**
-     * @Author: PP-jessica
-     * @Description:该channel是否注册过
+     * 该channel是否注册过
      */
     private volatile boolean registered;
 
@@ -96,8 +90,8 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
 
 
     /**
-     * @Author: PP-jessica
-     * @Description:得到本地地址
+     * 得到本地地址
+     * @return
      */
     @Override
     public SocketAddress localAddress() {
@@ -115,8 +109,8 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:得到远程地址
+     * 得到远程地址
+     * @return
      */
     @Override
     public SocketAddress remoteAddress() {
@@ -263,8 +257,7 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
     protected abstract AbstractUnsafe newUnsafe();
 
     /**
-     * @Author: PP-jessica
-     * @Description:Unsafe的抽象内部类，看到上面一下子多了那么多方法，而且还有很多是没实现的，一定会感到很懵逼
+     * Unsafe的抽象内部类，看到上面一下子多了那么多方法，而且还有很多是没实现的，一定会感到很懵逼
      * 但是，请记住这句话，在抽象类中，很多方法尽管实现了方法体，内在逻辑却并不复杂。因为这些方法几乎都是为子类服务的，
      * 换句话说，就是定义了一些模版方法而已，真正实现的方法在子类之中。就比调用了AbstractChannel抽象类的bind方法，
      * 在该方法内部，又会调用unsafe抽象内部类的bind方法，而该内部类的bind方法又会调用AbstractChannel类中的另一个抽象方法
@@ -273,7 +266,6 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
      * 首先，channel分为客户端和服务端，因为抽象出了公共的接口和父抽象类，两种channel不得不实现相同的方法，
      * 那么不同的channel实现的相同方法的逻辑应该不同，所以dobind设计为抽象方法是很合理的。因为你不能让NiosocketChannel客户端channel
      * 向服务端channel那样去绑定端口，虽然要做也确实可以这么做。。
-     * 按照我的这种思路，大家可以思考思考，为什么继承了同样的接口，有的方法可以出现在这个抽象类中，有的方法可以出现在那个抽象类中，为什么有的方法要设计成抽象的
      */
     protected abstract class AbstractUnsafe implements Unsafe {
 
@@ -292,8 +284,9 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
         }
 
         /**
-         * @Author: PP-jessica
-         * @Description:该方法终于回到了它本来的位置
+         * 该方法终于回到了它本来的位置
+         * @param eventLoop
+         * @param promise
          */
         @Override
         public final void register(EventLoop eventLoop, final ChannelPromise promise) {
@@ -365,8 +358,8 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
         }
 
         /**
-         * @Author: PP-jessica
-         * @Description:暂时不做实现，接下来的一些方法都不做实现，等之后讲到了再实现
+         * 暂时不做实现，接下来的一些方法都不做实现，等之后讲到了再实现
+         * @param promise
          */
         @Override
         public final void disconnect(final ChannelPromise promise) {}
@@ -375,8 +368,7 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
         public final void close(final ChannelPromise promise) {}
 
         /**
-         * @Author: PP-jessica
-         * @Description:强制关闭channel
+         * 强制关闭channel
          */
         @Override
         public final void closeForcibly() {
@@ -408,11 +400,11 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
         }
 
         /**
-         * @Author: PP-jessica
-         * @Description:这个方法在上一节课没有实现，在这一节课，我们也不会真正的实现它，但是可以在这里稍微加点东西，讲解一下发送消息的逻辑和步骤
-         * ByteBuf讲完了之后，我们再重写该方法。在这里，该方法只是把数据发送到了一个netty自定义的缓冲区中，还没有放入socket的缓冲区
+         * 在这里，该方法只是把数据发送到了一个netty自定义的缓冲区中，还没有放入socket的缓冲区
          * 真正的write方法在子类NioSocketChannel中实现，在那个方法中，数据才被真正放进socket的缓冲区中
          * 根据之前的老套路，仍需要在AbstractChannel抽象类中定义一个抽象方法，让子类去实现
+         * @param msg
+         * @param promise
          */
         @Override
         public final void write(Object msg, ChannelPromise promise) {
@@ -426,16 +418,15 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
         }
 
         /**
-         * @Author: PP-jessica
-         * @Description:在源码中，如果调用的是writeAndFlush方法发送数据，在write方法执行后，会紧接着执行flush方法
-         * 这个我们也会在后面讲到
+         * 在源码中，如果调用的是writeAndFlush方法发送数据，在write方法执行后，会紧接着执行flush方法
          */
         @Override
         public final void flush() {}
 
         /**
-         * @Author: PP-jessica
-         * @Description:确保channel是打开的
+         * 确保channel是打开的
+         * @param promise
+         * @return
          */
         protected final boolean ensureOpen(ChannelPromise promise) {
             if (isOpen()) {
@@ -459,9 +450,10 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:该方法的位置正确，但是参数和源码有差异，源码的参数是netty自己定义的ChannelOutboundBuffer，是出站的数据缓冲区
+     * 该方法的位置正确，但是参数和源码有差异，源码的参数是netty自己定义的ChannelOutboundBuffer，是出站的数据缓冲区
      * 现在，我们先用最简单的实现，之后再重写
+     * @param msg
+     * @throws Exception
      */
     protected abstract void doWrite(Object msg) throws Exception;
 

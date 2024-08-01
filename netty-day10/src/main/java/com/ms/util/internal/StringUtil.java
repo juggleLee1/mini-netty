@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Author: PP-jessica
- * @Description:netty自己封装的工具类，从源码复制过来，稍微注释了一些，不然要引入更多的源码
+ * netty自己封装的工具类，从源码复制过来，稍微注释了一些，不然要引入更多的源码
  */
 public final class StringUtil {
 

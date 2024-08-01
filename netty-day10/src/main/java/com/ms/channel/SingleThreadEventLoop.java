@@ -11,8 +11,7 @@ import java.util.concurrent.Executor;
 
 
 /**
- * @Author: PP-jessica
- * @Description:单线程事件循环，只要在netty中见到eventloop，就可以把该类视为线程类
+ * 单线程事件循环，只要在netty中见到eventloop，就可以把该类视为线程类
  */
 public abstract class SingleThreadEventLoop extends SingleThreadEventExecutor implements EventLoop{
 
@@ -29,8 +28,8 @@ public abstract class SingleThreadEventLoop extends SingleThreadEventExecutor im
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:下面这两个方法并不是在这里实现的，写在这里也只是暂时的
+     * 下面这两个方法并不是在这里实现的，写在这里也只是暂时的
+     * @return
      */
     @Override
     public EventLoopGroup parent() {
@@ -48,9 +47,10 @@ public abstract class SingleThreadEventLoop extends SingleThreadEventExecutor im
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:因为没有和ServerSocketChannel，SocketChannel解耦，
+     * 因为没有和ServerSocketChannel，SocketChannel解耦，
      * 这里原本是几个重载的注册方法。现在可以把这几个方法变成一个了
+     * @param channel
+     * @return
      */
     @Override
     public ChannelFuture register(Channel channel) {
@@ -59,8 +59,9 @@ public abstract class SingleThreadEventLoop extends SingleThreadEventExecutor im
     }
 
     /**
-     * @Author: PP-jessica
-     * @Description:因为还没有引入unsafe类，所以该方法暂时先简化实现
+     * 因为还没有引入unsafe类，所以该方法暂时先简化实现
+     * @param promise
+     * @return
      */
     @Override
     public ChannelFuture register(final ChannelPromise promise) {

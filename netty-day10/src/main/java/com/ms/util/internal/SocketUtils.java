@@ -13,8 +13,7 @@ import java.util.Enumeration;
 
 
 /**
- * @Author: PP-jessica
- * @Description:netty源码中的工具类
+ * netty源码中的工具类
  */
 public final class SocketUtils {
 

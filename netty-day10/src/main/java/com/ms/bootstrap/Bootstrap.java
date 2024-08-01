@@ -43,7 +43,7 @@ public class Bootstrap<C extends Channel> {
 
     private ChannelFuture doResolveAndConnect(final SocketAddress remoteAddress, final SocketAddress localAddress) {
         //这里的逻辑和serverbootstarp一样，但是在这里又要写一遍该方法，现在是不是发现，如果bootstarp和serverbootstarp有一个
-        //抽象父类就好了，就可以在父类中定义模版方法了。实际上源码中确实有一个父类，这个方法被定义在父类中，但我们暂时还不引入
+        //抽象父类就好了，就可以在父类中定义模版方法了。实际上源码中确实有一个父类，这个方法被定义在父类中
         //整个方法和serverbootstrap中的doBind方法类似，判断和处理逻辑几乎一样
         final ChannelFuture regFuture = initAndRegister();
         //得到要注册的kehuduanchannel
@@ -79,7 +79,7 @@ public class Bootstrap<C extends Channel> {
                                                final SocketAddress localAddress, final ChannelPromise promise) {
         try {
             //···
-            //前面有一大段解析器解析远程地址的逻辑，在这里我删除了，那些不是重点，我们先关注重点
+            //前面有一大段解析器解析远程地址的逻辑，在这里我删除了，那些不是重点
             doConnect(remoteAddress, localAddress, promise);
         } catch (Throwable cause) {
             promise.tryFailure(cause);
@@ -129,8 +129,8 @@ public class Bootstrap<C extends Channel> {
 
 
         /**
-         * @Author: PP-jessica
-         * @Description:该方法简化一下， 全局的执行器不是必须引入的
+         * 该方法简化一下， 全局的执行器不是必须引入的
+         * @return
          */
         @Override
         protected EventExecutor executor() {

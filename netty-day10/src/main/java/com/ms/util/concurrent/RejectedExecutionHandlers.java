@@ -5,8 +5,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
 /**
- * @Author: PP-jessica
- * @Description:创建拒绝策略处理器
+ * 创建拒绝策略处理器
  */
 public class RejectedExecutionHandlers {
 

@@ -3,8 +3,7 @@ package com.ms.channel;
 import java.util.Map;
 
 /**
- * @Author: PP-jessica
- * @Description:引入ChannelConfig配置类，这里面我删除了几个暂时还用不到的方法，等之后用到的时候再引入
+ * 引入ChannelConfig配置类，这里面我删除了几个暂时还用不到的方法，等之后用到的时候再引入
  */
 public interface ChannelConfig {
 

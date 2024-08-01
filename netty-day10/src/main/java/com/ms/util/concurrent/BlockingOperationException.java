@@ -2,8 +2,7 @@ package com.ms.util.concurrent;
 
 
 /**
- * @Author: PP-jessica
- * @Description:netty中的一个异常类，直接把源码复制过来了
+ * netty中的一个异常类，直接把源码复制过来了
  */
 public class BlockingOperationException extends IllegalStateException {
 

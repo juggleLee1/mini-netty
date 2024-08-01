@@ -2,8 +2,8 @@ package com.ms.util.concurrent;
 
 
 /**
- * @Author: PP-jessica
- * @Description:在netty中，返回的future中，基本都是该接口的实现类
+ * 在netty中，返回的future中，基本都是该接口的实现类
+ * @param <V>
  */
 public interface Promise<V> extends Future<V> {
 

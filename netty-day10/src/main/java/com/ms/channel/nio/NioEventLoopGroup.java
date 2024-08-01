@@ -11,8 +11,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadFactory;
 
 /**
- * @Author: PP-jessica
- * @Description:线程组，其实就是包含了一组单线程执行器的事件循环组。实际上，这个循环组并不处理任何
+ * 线程组，其实就是包含了一组单线程执行器的事件循环组。实际上，这个循环组并不处理任何
  * 事件，真正处理事件的仍是nioeventloop，有点像代理模式？总之，这个类的引入，可以让netty的服务端使用主从线程模式
  * boss分配一个线程，而worker线程按规则分配线程
  */

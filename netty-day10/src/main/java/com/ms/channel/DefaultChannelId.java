@@ -2,10 +2,8 @@ package com.ms.channel;
 
 
 /**
- * @Author: PP-jessica
- * @Description:channelId默认的实现类
- * 兄弟们，这个类中调用了很多操作系统方法，我就不引进这个了，引入这个类就需要引入更多不必要的类。所以我直接用最简单的
- * 方式代替吧，就搞一个时间戳作为channelId
+ * channelId默认的实现类
+ * 直接用最简单的方式代替吧，就搞一个时间戳作为channelId
  */
 public class DefaultChannelId implements ChannelId{
 

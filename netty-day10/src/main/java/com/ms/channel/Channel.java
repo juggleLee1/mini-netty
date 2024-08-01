@@ -5,8 +5,7 @@ import com.ms.util.AttributeMap;
 import java.net.SocketAddress;
 
 /**
- * @Author: PP-jessica
- * @Description:channel的顶级接口,暂时引入部分方法
+ * channel的顶级接口,暂时引入部分方法
  */
 public interface Channel extends AttributeMap,  ChannelOutboundInvoker{
 
@@ -18,10 +17,7 @@ public interface Channel extends AttributeMap,  ChannelOutboundInvoker{
 
     Channel parent();
 
-    /**
-     * @Author: PP-jessica
-     * @Description:这一节课引入channelConfig
-     */
+
     ChannelConfig config();
 
 
@@ -43,8 +39,8 @@ public interface Channel extends AttributeMap,  ChannelOutboundInvoker{
     ChannelFuture closeFuture();
 
     /**
-     * @Author: PP-jessica
-     * @Description:终于引入了Unsafe类
+     * 终于引入了Unsafe类
+     * @return
      */
     Unsafe unsafe();
 
@@ -55,8 +51,7 @@ public interface Channel extends AttributeMap,  ChannelOutboundInvoker{
     Channel flush();
 
     /**
-     * @Author: PP-jessica
-     * @Description:看到这个接口中的方法，是不是发现很多都和ChannelOutboundInvoker这个类中的重复？
+     * 看到这个接口中的方法，是不是发现很多都和ChannelOutboundInvoker这个类中的重复？
      * 稍微想一想就会明白，channel调用方法，但真正执行还是由unsafe的实现类来执行，虽然最后有可能还是调用到channel中
      */
     interface Unsafe {
