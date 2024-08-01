@@ -180,7 +180,7 @@ public class NioSocketChannel extends AbstractNioByteChannel {
 
 
     /**
-     * 用户设置的客户端channel的参数由此类进行设置，这里面有的方法现在还不需要是用来干什么的，等学完ByteBuf了会全部讲解
+     * 用户设置的客户端channel的参数由此类进行设置，这里面有的方法现在还不需要是用来干什么的，等引入ByteBuf
      */
     private final class NioSocketChannelConfig extends DefaultSocketChannelConfig {
         private volatile int maxBytesPerGatheringWrite = Integer.MAX_VALUE;

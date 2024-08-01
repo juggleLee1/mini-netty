@@ -61,8 +61,7 @@ public class ChannelOption<T> extends AbstractConstant<ChannelOption<T>> {
      * 记得我们给channel配置的参数吗option(ChannelOption.SO_BACKLOG,128)，是不是很熟悉，我们拿来即用的常量，因为作者
      * 已经创建好了。这里我多说一句，不要被ChannelOption<T>中的泛型给迷惑了，觉得ChannelOption中也存储着
      * 用户定义的值，就是那个泛型的值，比如说option(ChannelOption.SO_BACKLOG,128)里面的128，以为ChannelOption<Integer>中的integer
-     * 存储的就是128，实际上128存储在serverbootstrap的linkmap中。而作者之所以给常量类设定泛型，是因为Attribut会存储泛型的值，这个我们在这节课
-     * 就会讲到
+     * 存储的就是128，实际上128存储在serverbootstrap的linkmap中。而作者之所以给常量类设定泛型，是因为Attribut会存储泛型的值
      */
     // 全连接队列的容量
     public static final ChannelOption<Integer> SO_BACKLOG = valueOf("SO_BACKLOG");

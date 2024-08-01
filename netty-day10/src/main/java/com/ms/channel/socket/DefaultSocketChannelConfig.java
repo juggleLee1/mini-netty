@@ -14,8 +14,7 @@ import static com.ms.channel.ChannelOption.*;
 
 /**
  * NioSocketChannel默认使用的配置类，这里面有很多方法我们暂时还用不到，但提前引入也不报错
- * 所以我就先放在这里了，在这个类中，需要我们关注的还是那几个常量类参数，看看有哪几个是你熟悉的，再结合这节课的例子
- * 看看它们究竟是怎么被使用的
+ * 所以我就先放在这里了，在这个类中，需要我们关注的还是那几个常量类参数
  */
 public class DefaultSocketChannelConfig extends DefaultChannelConfig
         implements SocketChannelConfig {
